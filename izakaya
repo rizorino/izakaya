@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>乾杯する前に飲むな</title>
+    <title>30問のカオス居酒屋ゲーム</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -231,7 +231,7 @@
         function showGameOver() {
             const gameContainer = document.getElementById("game-container");
             gameContainer.innerHTML = `
-                <p class="game-over">ふざけるな！</p>
+                <p class="game-over">ゲームオーバー！</p>
                 <button onclick="restartGame()">もう一度やる</button>
             `;
         }
@@ -239,7 +239,7 @@
         function showSuccess() {
             const gameContainer = document.getElementById("game-container");
             gameContainer.innerHTML = `
-                <p class="success">おめでとう</p>
+                <p class="success">全てクリア！おめでとう！</p>
                 <button onclick="restartGame()">もう一度やる</button>
             `;
         }

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乾杯する前に飲むな</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        #game-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .game-over {
+            color: red;
+            font-size: 24px;
+        }
+        .success {
+            color: green;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>30問のカオス居酒屋ゲーム</h1>
+        <p id="story">お前の眼球は耳の後ろについてるのかよ</p>
+        <button onclick="checkAnswer(1)">分かります、その気持ち</button>
+        <button onclick="checkAnswer(2)">そうですね、もう帰りましょう</button>
+        <button onclick="checkAnswer(3)">緑茶ハイを二つください</button>
+    </div>
+
+    <script>
+        const storyData = [
+            { 
+                question: "お前の眼球は耳の後ろについてるのかよ", 
+                choices: [
+                    "分かります、その気持ち", 
+                    "そうですね、もう帰りましょう", 
+                    "緑茶ハイを二つください"
+                ], 
+                correct: 3 
+            },
+            { 
+                question: "お隣よろしいですか？", 
+                choices: [
+                    "誰だあんた", 
+                    "分かりません", 
+                    "秋晴れに咲く明星の輝き…ですか？"
+                ], 
+                correct: 3 
+            },
+            { 
+                question: "たこわさです", 
+                choices: [
+                    "頼んでないですよ", 
+                    "サービスなんですか？", 
+                    "食べたら契約成立ですか？"
+                ], 
+                correct: 2 
+            },
+            { 
+                question: "困ります、どなたですか", 
+                choices: [
+                    "私はたこわさの精です", 
+                    "秋晴れの明星と申します", 
+                    "名乗る必要はありません"
+                ], 
+                correct: 2 
+            },
+            { 
+                question: "栗原さん、ゲームボーイアドバンスの話はしないって約束じゃないですか", 
+                choices: [
+                    "約束を破るのも大人の醍醐味です", 
+                    "そんな約束してません", 
+                    "いや、話すべきです"
+                ], 
+                correct: 1 
+            },
+            { 
+                question: "民家の壁の木目に存在する顔の形と同じように…", 
+                choices: [
+                    "分かりません", 
+                    "言い得て妙ですね", 
+                    "黙ってください"
+                ], 
+                correct: 2 
+            },
+            { 
+                question: "契約が成立しました。法律的に言えば…", 
+                choices: [
+                    "そんな理屈通りません", 
+                    "分かります、受け入れます", 
+                    "何を言っているんですか？"
+                ], 
+                correct: 2 
+            },
+            { 
+                question: "だから誰なんだあんた", 
+                choices: [
+                    "秋晴れの明星です", 
+                    "ただの客です", 
+                    "誰でもないです"
+                ], 
+                correct: 1 
+            },
+            { 
+                question: "ゲームオーバーになりたくなければ？", 
+                choices: [
+                    "たこわさを返してください", 
+                    "たこわさを買い取ります", 
+                    "たこわさをもっとください"
+                ], 
+                correct: 3 
+            },
+            { 
+                question: "包丁の斜塔。今日から世界遺産です", 
+                choices: [
+                    "そんなことあるわけない", 
+                    "登録申請しましたか？", 
+                    "すごい発想ですね"
+                ], 
+                correct: 2 
+            },
+            { 
+                question: "もうファジーネーブルでいいです", 
+                choices: [
+                    "了解しました", 
+                    "粗茶でお願いします", 
+                    "何でもいいですよ"
+                ], 
+                correct: 1 
+            },
+            { 
+                question: "人生の最後にNAVERまとめが必要な理由", 
+                choices: [
+                    "面白いから", 
+                    "思い出になるから", 
+                    "必要ないです"
+                ], 
+                correct: 1 
+            },
+            { 
+                question: "たこわさの音が気持ち悪い", 
+                choices: [
+                    "黙って食べます", 
+                    "たこわさを放棄します", 
+                    "文句を言います"
+                ], 
+                correct: 1 
+            },
+            { 
+                question: "シャンプーとトリートメント4000円とちょっと", 
+                choices: [
+                    "正確な数字を教えてください", 
+                    "Amazonギフトカードでいいですか？", 
+                    "分かりました、払います"
+                ], 
+                correct: 1 
+            },
+            { 
+                question: "メンズクリアに通ってよかった", 
+                choices: [
+                    "素晴らしい", 
+                    "どうでもいいです", 
+                    "それは良いことですね"
+                ], 
+                correct: 3 
+            },
+            { 
+                question: "気色悪い音を立てないでください", 
+                choices: [
+                    "ごめんなさい", 
+                    "うるさいな", 
+                    "黙って食べます"
+                ], 
+                correct: 3 
+            },
+            // ... 続けてさらに15問以上を追加 ...
+        ];
+
+        let currentStage = 0;
+
+        function checkAnswer(choice) {
+            const current = storyData[currentStage];
+            if (choice === current.correct) {
+                currentStage++;
+                if (currentStage < storyData.length) {
+                    loadStage();
+                } else {
+                    showSuccess();
+                }
+            } else {
+                showGameOver();
+            }
+        }
+
+        function loadStage() {
+            const current = storyData[currentStage];
+            const gameContainer = document.getElementById("game-container");
+
+            gameContainer.innerHTML = `
+                <p id="story">${current.question}</p>
+                ${current.choices.map((choice, index) => `
+                    <button onclick="checkAnswer(${index + 1})">${choice}</button>
+                `).join('')}
+            `;
+        }
+
+        function showGameOver() {
+            const gameContainer = document.getElementById("game-container");
+            gameContainer.innerHTML = `
+                <p class="game-over">ふざけるな！</p>
+                <button onclick="restartGame()">もう一度やる</button>
+            `;
+        }
+
+        function showSuccess() {
+            const gameContainer = document.getElementById("game-container");
+            gameContainer.innerHTML = `
+                <p class="success">おめでとう</p>
+                <button onclick="restartGame()">もう一度やる</button>
+            `;
+        }
+
+        function restartGame() {
+            currentStage = 0;
+            loadStage();
+        }
+    </script>
+</body>
+</html>
